@@ -26,44 +26,60 @@ fun SpringWaveAnimation() {
 
     val circle1offsetState = animateDpAsState(
         targetValue = if(currentAnimationState == Start) 600.dp else 300.dp,
-        //spring(dampingRatio = Spring.DampingRatioHighBouncy)
-        animationSpec = tween<Dp>(1000, 0, LinearEasing)
+        spring(
+            dampingRatio = Spring.DampingRatioHighBouncy,
+            visibilityThreshold = 170.dp,
+            stiffness = 7f
+        )
+        //animationSpec = tween<Dp>(1000, 0, LinearEasing)
     )
 
     val circle2offsetState = animateDpAsState(
         targetValue = if(currentAnimationState == Start) 597.5.dp else (297.5).dp,
-        //spring(dampingRatio = Spring.DampingRatioHighBouncy)
-        animationSpec = tween<Dp>(1000, 50, LinearEasing)
+        spring(dampingRatio = Spring.DampingRatioHighBouncy,
+            visibilityThreshold = 150.dp,
+            stiffness = 7f),
+        //animationSpec = tween<Dp>(1000, 50, LinearEasing)
     )
 
     val circle3offsetState = animateDpAsState(
         targetValue = if(currentAnimationState == Start) 595.dp else 295.dp,
-        //spring(dampingRatio = Spring.DampingRatioHighBouncy)
-        animationSpec = tween<Dp>(1000, 100, LinearEasing)
+        spring(dampingRatio = Spring.DampingRatioHighBouncy,
+            visibilityThreshold = 130.dp,
+            stiffness = 7f)
+        //animationSpec = tween<Dp>(1000, 100, LinearEasing)
     )
 
     val circle4offsetState = animateDpAsState(
         targetValue = if(currentAnimationState == Start) 592.5.dp else (292.5).dp,
-        //spring(dampingRatio = Spring.DampingRatioHighBouncy)
-        animationSpec = tween<Dp>(1000, 150, LinearEasing)
+        spring(dampingRatio = Spring.DampingRatioHighBouncy,
+            visibilityThreshold = 11.dp,
+            stiffness = 7f)
+        //animationSpec = tween<Dp>(1000, 150, LinearEasing)
     )
 
     val circle5offsetState = animateDpAsState(
         targetValue = if(currentAnimationState == Start) 589.75.dp else (289.75).dp,
-        //spring(dampingRatio = Spring.DampingRatioHighBouncy)
-        animationSpec = tween<Dp>(1000, 200, LinearEasing)
+        spring(dampingRatio = Spring.DampingRatioHighBouncy,
+            visibilityThreshold = 9.dp,
+            stiffness = 7f)
+        //animationSpec = tween<Dp>(1000, 200, LinearEasing)
     )
 
     val circle6offsetState = animateDpAsState(
         targetValue = if(currentAnimationState == Start) 587.dp else 287.dp,
-        //spring(dampingRatio = Spring.DampingRatioHighBouncy)
-        animationSpec = tween<Dp>(1000, 250, LinearEasing)
+        spring(dampingRatio = Spring.DampingRatioHighBouncy,
+            visibilityThreshold = 7.dp,
+            stiffness = 7f)
+        //animationSpec = tween<Dp>(1000, 250, LinearEasing)
     )
 
     val circle7offsetState = animateDpAsState(
         targetValue = if(currentAnimationState == Start) 584.dp else 284.dp,
-        //spring(dampingRatio = Spring.DampingRatioHighBouncy)
-        animationSpec = tween<Dp>(1000, 300, LinearEasing)
+        spring(dampingRatio = Spring.DampingRatioHighBouncy,
+            visibilityThreshold = 5.dp,
+            stiffness = 7f)
+        //animationSpec = tween<Dp>(1000, 300, LinearEasing)
     )
 
     BoxWithConstraints(
