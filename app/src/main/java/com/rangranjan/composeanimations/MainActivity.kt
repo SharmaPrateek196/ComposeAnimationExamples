@@ -11,11 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.rangranjan.composeanimations.ui.SpringWaveAnimation
+import com.rangranjan.composeanimations.ui.alarm.AlarmAnimation
 import com.rangranjan.composeanimations.ui.theme.ComposeAnimationsTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             ComposeAnimationsTheme {
                 // A surface container using the 'background' color from the theme
@@ -23,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    SpringWaveAnimation()
+                    AlarmAnimation()
                 }
             }
         }
