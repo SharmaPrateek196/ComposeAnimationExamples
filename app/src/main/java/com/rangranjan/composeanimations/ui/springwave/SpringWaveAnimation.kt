@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.rangranjan.composeanimations.ui.AnimationState.End
 import com.rangranjan.composeanimations.ui.AnimationState.Start
 import com.rangranjan.composeanimations.ui.springwave.Oval3D
 import kotlinx.coroutines.delay
@@ -24,34 +25,90 @@ fun SpringWaveAnimation() {
     var currentAnimationState by remember { mutableStateOf(Start)}
 
     val circle1offsetState = remember {
-        Animatable(600f)
+        Animatable(if(currentAnimationState==Start) 500f else 200f)
     }
 
     val circle2offsetState = remember {
-        Animatable(597.5f)
+        Animatable(if(currentAnimationState==Start) 497.5f else 197.5f)
     }
 
     val circle3offsetState = remember {
-        Animatable(595f)
+        Animatable(if(currentAnimationState==Start) 495f else 195f)
     }
 
     val circle4offsetState = remember {
-        Animatable(592.5f)
+        Animatable(if(currentAnimationState==Start) 492.5f else 192.5f)
     }
 
     val circle5offsetState = remember {
-        Animatable(589.75f)
+        Animatable(if(currentAnimationState==Start) 489.75f else 189.75f)
     }
 
     val circle6offsetState = remember {
-        Animatable(587f)
+        Animatable(if(currentAnimationState==Start) 487f else 187f)
     }
 
     val circle7offsetState = remember {
-        Animatable(584f)
+        Animatable(if(currentAnimationState==Start) 484f else 184f)
     }
 
-    val coroutineScope = rememberCoroutineScope()
+    LaunchedEffect(key1 = currentAnimationState) {
+        launch {
+            /*
+            * Need to launch these coroutines in different different
+            * scopes because we want that they all run simultaneously
+            * with there own delays from the global starting time.
+            *
+            * If we would have used these all animateTo() methods in
+            * a single coroutine scope then they would run sequentially
+            * one after another; means that the second ring would start moving
+            * only after the damping effect of the first ring completes.
+            * */
+
+            launch {
+                circle1offsetState.animateTo(
+                    if(currentAnimationState==Start) 200f else 500f,
+                    spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
+            }
+            launch {
+                delay(40)
+                circle2offsetState.animateTo(
+                    if(currentAnimationState==Start) 197.5f else 497.5f,
+                    spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
+            }
+            launch {
+                delay(90)
+                circle3offsetState.animateTo(
+                    if(currentAnimationState==Start) 195f else 495f,
+                    spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
+            }
+            launch {
+                delay(130)
+                circle4offsetState.animateTo(
+                    if(currentAnimationState==Start) 192.5f else 492.5f,
+                    spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
+            }
+            launch {
+                delay(170)
+                circle5offsetState.animateTo(
+                    if(currentAnimationState==Start) 189.75f else 489.75f,
+                    spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
+            }
+            launch {
+                delay(210)
+                circle6offsetState.animateTo(
+                    if(currentAnimationState==Start) 187f else 487f,
+                    spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
+            }
+            launch {
+                delay(250)
+                circle7offsetState.animateTo(
+                    if(currentAnimationState==Start) 184f else 484f,
+                    spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow)
+                )
+            }
+        }
+    }
 
     BoxWithConstraints(
         modifier = Modifier
@@ -71,50 +128,19 @@ fun SpringWaveAnimation() {
                 .align(Alignment.BottomCenter)
                 .wrapContentSize(align = Alignment.Center),
             onClick = {
-
-                coroutineScope.launch {
-
-                    /*
-                    * Need to launch these coroutines in different different
-                    * scopes because we want that they all run simultaneously
-                    * with there own delays from the global starting time.
-                    *
-                    * If we would have used these all animateTo() methods in
-                    * a single coroutine scope then they would run sequentially
-                    * one after another; means that the second ring would start moving
-                    * only after the damping effect of the first ring completes.
-                    * */
-
-                    launch {
-                        circle1offsetState.animateTo(300f, spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
-                    }
-                    launch {
-                        delay(40)
-                        circle2offsetState.animateTo(297.5f, spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
-                    }
-                    launch {
-                        delay(90)
-                        circle3offsetState.animateTo(295f, spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
-                    }
-                    launch {
-                        delay(130)
-                        circle4offsetState.animateTo(292.5f, spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
-                    }
-                    launch {
-                        delay(170)
-                        circle5offsetState.animateTo(289.75f, spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
-                    }
-                    launch {
-                        delay(210)
-                        circle6offsetState.animateTo(287f, spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
-                    }
-                    launch {
-                        delay(250)
-                        circle7offsetState.animateTo(284f, spring(Spring.DampingRatioHighBouncy, Spring.StiffnessVeryLow))
-                    }
+                if(currentAnimationState == End) {
+                    currentAnimationState = Start
+                } else {
+                    currentAnimationState = End
                 }
             }) {
-            Text(text = "Trigger the Magic")
+            Text(
+                text = if(currentAnimationState==Start) {
+                    "Move the wave to down"
+                } else {
+                    "Move the wave to Up"
+                }
+            )
         }
     }
 }
