@@ -1,6 +1,6 @@
 # ComposeAnimationExamples
 
-## This repo has some Compose Animation practice with code
+## This repo has some Compose Animation practice examples with code
 
 ### 🌊 Spring-wave
 
