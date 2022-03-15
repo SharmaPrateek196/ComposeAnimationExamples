@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     BoxWithConstraints(
                         contentAlignment = Alignment.Center
                     ) {
-                        AlarmAnimation()
+                        SpringWaveAnimation()
                     }
                 }
             }
