@@ -15,6 +15,7 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.rangranjan.composeanimations.ui.SpringWaveAnimation
 import com.rangranjan.composeanimations.ui.alarm.AlarmAnimation
+import com.rangranjan.composeanimations.ui.happyholi.HappyHoliAnimation
 import com.rangranjan.composeanimations.ui.theme.ComposeAnimationsTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,30 +30,32 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val pagerState = rememberPagerState()
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        HorizontalPager(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxWidth(),
-                            count = 2, state = pagerState,
-                        ) { page ->
-                            // Our page content
-                            when (page) {
-                                0 -> {
-                                    SpringWaveAnimation()
-                                }
-                                1 -> {
-                                    AlarmAnimation()
-                                }
-                            }
-                        }
-                        HorizontalPagerIndicator(
-                            pagerState = pagerState,
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .padding(16.dp),
-                        )
-                    }
+//                    Column(modifier = Modifier.fillMaxSize()) {
+//                        HorizontalPager(
+//                            modifier = Modifier
+//                                .weight(1f)
+//                                .fillMaxWidth(),
+//                            count = 2, state = pagerState,
+//                        ) { page ->
+//                            // Our page content
+//                            when (page) {
+//                                0 -> {
+//                                    SpringWaveAnimation()
+//                                }
+//                                1 -> {
+//                                    AlarmAnimation()
+//                                }
+//                            }
+//                        }
+//                        HorizontalPagerIndicator(
+//                            pagerState = pagerState,
+//                            modifier = Modifier
+//                                .align(Alignment.CenterHorizontally)
+//                                .padding(16.dp),
+//                        )
+//                    }
+
+                    HappyHoliAnimation()
                 }
             }
         }
