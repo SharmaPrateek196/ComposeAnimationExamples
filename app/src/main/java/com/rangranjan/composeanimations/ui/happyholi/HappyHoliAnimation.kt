@@ -1,5 +1,6 @@
 package com.rangranjan.composeanimations.ui.happyholi
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.rangranjan.composeanimations.R
 import kotlinx.coroutines.launch
@@ -116,59 +118,12 @@ fun HappyHoliAnimation() {
                 )
             }
 
-            Image(
-                painter = painterResource(id = R.drawable.water3),
-                contentDescription = "balloon",
-                modifier = Modifier
-                    .size(animatedWaterWorksSize.value.dp)
-                    .absoluteOffset(-100.dp, -250.dp)
-                    .align(Alignment.Center)
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.water4),
-                contentDescription = "balloon",
-                modifier = Modifier
-                    .size(animatedWaterWorksSize.value.dp)
-                    .absoluteOffset(100.dp, -300.dp)
-                    .align(Alignment.Center)
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.water1),
-                contentDescription = "balloon",
-                modifier = Modifier
-                    .size(animatedWaterWorksSize.value.dp)
-                    .absoluteOffset(80.dp, -130.dp)
-                    .align(Alignment.Center)
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.water4),
-                contentDescription = "balloon",
-                modifier = Modifier
-                    .size(animatedWaterWorksSize.value.dp)
-                    .absoluteOffset(-80.dp, 200.dp)
-                    .align(Alignment.Center)
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.water3),
-                contentDescription = "balloon",
-                modifier = Modifier
-                    .size(animatedWaterWorksSize.value.dp)
-                    .absoluteOffset(80.dp, 130.dp)
-                    .align(Alignment.Center)
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.water1),
-                contentDescription = "balloon",
-                modifier = Modifier
-                    .size(animatedWaterWorksSize.value.dp)
-                    .absoluteOffset(100.dp, 270.dp)
-                    .align(Alignment.Center)
-            )
+            WaterWork(R.drawable.water3, animatedWaterWorksSize, -100.dp, -250.dp, Modifier.align(Alignment.Center))
+            WaterWork(R.drawable.water4, animatedWaterWorksSize, 100.dp, -300.dp, Modifier.align(Alignment.Center))
+            WaterWork(R.drawable.water1, animatedWaterWorksSize, 80.dp, -130.dp, Modifier.align(Alignment.Center))
+            WaterWork(R.drawable.water4, animatedWaterWorksSize, -80.dp, 200.dp, Modifier.align(Alignment.Center))
+            WaterWork(R.drawable.water3, animatedWaterWorksSize, 80.dp, 130.dp, Modifier.align(Alignment.Center))
+            WaterWork(R.drawable.water1, animatedWaterWorksSize, 100.dp, 270.dp, Modifier.align(Alignment.Center))
         }
 
         Button(onClick = {
@@ -179,6 +134,22 @@ fun HappyHoliAnimation() {
             Text(text = "Toggle Animation")
         }
     }
+}
+
+@Composable
+fun WaterWork(
+    @DrawableRes image: Int,
+    animatedWaterWorksSize: Animatable<Float, AnimationVector1D>,
+    x: Dp, y: Dp,
+    modifier: Modifier
+) {
+    Image(
+        painter = painterResource(id = image),
+        contentDescription = "balloon",
+        modifier = modifier
+            .size(animatedWaterWorksSize.value.dp)
+            .absoluteOffset(x, y)
+    )
 }
 
 enum class AnimationState {
